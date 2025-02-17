@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://yj3hw241ta1"]
+
+[ext_resource type="Script" path="res://scripts/ScoreBoundary.cs" id="1_cwott"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_flrhm"]
+
+[node name="ScoreBoundary" type="StaticBody2D"]
+script = ExtResource("1_cwott")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_flrhm")

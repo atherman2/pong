@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://pbyeu8o834f7"]
+
+[ext_resource type="Script" path="res://scripts/Score.cs" id="1_lbxn1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bawt6"]
+font_size = 128
+font_color = Color(0.513233, 0.513233, 0.513233, 1)
+
+[node name="Score" type="Control" node_paths=PackedStringArray("playerScoreLabel", "opponentScoreLabel")]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lbxn1")
+playerScoreLabel = NodePath("PlayerScore")
+opponentScoreLabel = NodePath("OpponentScore")
+
+[node name="PlayerScore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 197.0
+offset_right = 497.0
+offset_bottom = 416.0
+text = "0"
+label_settings = SubResource("LabelSettings_bawt6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpponentScore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 194.0
+offset_right = 959.0
+offset_bottom = 413.0
+text = "0"
+label_settings = SubResource("LabelSettings_bawt6")
+horizontal_alignment = 1
+vertical_alignment = 1

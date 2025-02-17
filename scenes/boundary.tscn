@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://73rf5c67rh8s"]
+
+[ext_resource type="Script" path="res://scripts/Boundary.cs" id="1_sgxun"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3mjdl"]
+
+[node name="Boundary" type="StaticBody2D"]
+script = ExtResource("1_sgxun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_3mjdl")

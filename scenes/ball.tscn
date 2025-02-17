@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://8c24umftfq3y"]
+
+[ext_resource type="Script" path="res://scripts/Ball.cs" id="1_qobk7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qkadb"]
+radius = 15.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_shbmr"]
+
+[node name="Ball" type="RigidBody2D"]
+script = ExtResource("1_qobk7")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qkadb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.76837e-07, 4.76837e-07)
+scale = Vector2(30, 30)
+texture = SubResource("PlaceholderTexture2D_shbmr")
