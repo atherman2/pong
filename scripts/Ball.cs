@@ -43,7 +43,6 @@ public partial class Ball : RigidBody2D
 			ScoreBoundary scoreBoundaryHit = (ScoreBoundary) body;
 			EmitSignal(SignalName.Scored, scoreBoundaryHit.GetScoreSideObject());
 			xDirection = -xDirection;
-			LinearVelocity = new Vector2(xDirection * velocity, yDirection * velocity);
 		}
 	}
 
@@ -61,9 +60,10 @@ public partial class Ball : RigidBody2D
 			Transform2D.Identity.Translated(respawnPoint)
 		);
 		LinearVelocity = Vector2.Zero;
-		PhysicsServer2D.BodySetAxisVelocity
+		PhysicsServer2D.BodySetState
 		(
 			GetRid(),
+			PhysicsServer2D.BodyState.LinearVelocity,
 			Vector2.Zero
 		);
 		restartTimer.Start();
