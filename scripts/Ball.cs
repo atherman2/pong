@@ -1,8 +1,10 @@
 using Godot;
 using System;
+using System.Runtime.Serialization;
 
 public partial class Ball : RigidBody2D
 {
+	[Export] private Timer restartTimer;
 	[Export] private float xDirection, yDirection, velocity;
 	[Signal] public delegate void ScoredEventHandler(ScoreBoundary.ScoreSideObject scoreSideObject);
 	private Vector2 respawnPoint;
@@ -12,6 +14,7 @@ public partial class Ball : RigidBody2D
 	{
 		respawnPoint = Position;
 		BodyEntered += OnBodyEntered;
+		restartTimer.Timeout += OnTimeOut;
 		ContactMonitor = true;
 		MaxContactsReported = 3;
 		LinearVelocity = new Vector2(xDirection * velocity, yDirection * velocity);
@@ -44,6 +47,11 @@ public partial class Ball : RigidBody2D
 		}
 	}
 
+	public void OnTimeOut()
+	{
+		LinearVelocity = new Vector2(xDirection * velocity, yDirection * velocity);
+	}
+
 	public void Respawn()
 	{
 		PhysicsServer2D.BodySetState
@@ -52,5 +60,12 @@ public partial class Ball : RigidBody2D
 			PhysicsServer2D.BodyState.Transform,
 			Transform2D.Identity.Translated(respawnPoint)
 		);
+		LinearVelocity = Vector2.Zero;
+		PhysicsServer2D.BodySetAxisVelocity
+		(
+			GetRid(),
+			Vector2.Zero
+		);
+		restartTimer.Start();
 	}
 }

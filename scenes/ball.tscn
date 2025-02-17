@@ -7,8 +7,9 @@ radius = 15.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_shbmr"]
 
-[node name="Ball" type="RigidBody2D"]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("restartTimer")]
 script = ExtResource("1_qobk7")
+restartTimer = NodePath("Timer")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qkadb")
@@ -17,3 +18,6 @@ shape = SubResource("CircleShape2D_qkadb")
 position = Vector2(4.76837e-07, 4.76837e-07)
 scale = Vector2(30, 30)
 texture = SubResource("PlaceholderTexture2D_shbmr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
