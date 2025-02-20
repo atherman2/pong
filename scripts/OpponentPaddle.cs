@@ -3,10 +3,7 @@ using System;
 
 public partial class OpponentPaddle : Paddle
 {
-	[Export] private Ball ball;
-	[Export] private double coolDown, remainingCoolDown;
-	[Export] private float outDatedBallDirection, velocity;
-
+	[Export] private float velocity;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -20,25 +17,12 @@ public partial class OpponentPaddle : Paddle
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-		UpdateCoolDown(delta);
+		LinearVelocity = VelocityOnInput();
     }
 
-	public void UpdateCoolDown(double delta)
+    public Vector2 VelocityOnInput()
 	{
-		if(remainingCoolDown > 0.0)
-		{
-			remainingCoolDown -= delta;
-		}
-		else
-		{
-			UpdateBallPursuit();
-			remainingCoolDown = coolDown - delta;
-		}
-	}
-
-	public void UpdateBallPursuit()
-	{
-		LinearVelocity = new Vector2(0, velocity * outDatedBallDirection);
-		outDatedBallDirection = Math.Sign(ball.Position.Y - Position.Y);
+		float yDirection = Input.GetAxis("moveUp2", "moveDown2");
+		return new Vector2(0, yDirection * velocity);
 	}
 }

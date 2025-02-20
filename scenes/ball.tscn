@@ -10,6 +10,9 @@ radius = 15.0
 [node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("restartTimer")]
 script = ExtResource("1_qobk7")
 restartTimer = NodePath("Timer")
+xCoeficient = 0.707
+yCoeficient = 0.707
+velocity = 494.975
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qkadb")

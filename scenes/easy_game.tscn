@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw1qtc4bk5x5f"]
+
+[ext_resource type="PackedScene" uid="uid://dovn6os0wm0l8" path="res://scenes/medium_game.tscn" id="1_g7kii"]
+
+[node name="EasyGame" instance=ExtResource("1_g7kii")]
+
+[node name="MediumPaddle" parent="Paddles" index="1"]
+coolDown = 0.15

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Game : Node2D
+public partial class BaseGame : Node2D
 {
 	[Export] private Score score;
 	[Export] private Ball ball;

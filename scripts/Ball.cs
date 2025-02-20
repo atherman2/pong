@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 public partial class Ball : RigidBody2D
 {
 	[Export] private Timer restartTimer;
-	[Export] private float xDirection, yDirection, velocity;
+	[Export] private float xCoeficient, yCoeficient, velocity;
 	[Signal] public delegate void ScoredEventHandler(ScoreBoundary.ScoreSideObject scoreSideObject);
 	private Vector2 respawnPoint;
 
@@ -17,7 +17,7 @@ public partial class Ball : RigidBody2D
 		restartTimer.Timeout += OnTimeOut;
 		ContactMonitor = true;
 		MaxContactsReported = 3;
-		LinearVelocity = new Vector2(xDirection * velocity, yDirection * velocity);
+		LinearVelocity = new Vector2(xCoeficient * velocity, yCoeficient * velocity);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,26 +29,28 @@ public partial class Ball : RigidBody2D
 	{
 		if(body is Paddle)
 		{
-			xDirection = -xDirection;
-			LinearVelocity = new Vector2(xDirection * velocity, yDirection * velocity);
+			float angle = 1.22173f * GD.Randf() + 0.174533f;
+			xCoeficient = - Math.Sign(xCoeficient) * (float) Math.Cos(angle);
+			yCoeficient = Math.Sign(yCoeficient) * (float) Math.Sin(angle);
+			LinearVelocity = new Vector2(xCoeficient * velocity, yCoeficient * velocity);
 		}
 		else if(body is Boundary)
 		{
-			yDirection = -yDirection;
-			LinearVelocity = new Vector2(xDirection * velocity, yDirection * velocity);
+			yCoeficient = -yCoeficient;
+			LinearVelocity = new Vector2(xCoeficient * velocity, yCoeficient * velocity);
 		}
 		else if(body is ScoreBoundary)
 		{
 			Respawn();
 			ScoreBoundary scoreBoundaryHit = (ScoreBoundary) body;
 			EmitSignal(SignalName.Scored, scoreBoundaryHit.GetScoreSideObject());
-			xDirection = -xDirection;
+			xCoeficient = -xCoeficient;
 		}
 	}
 
 	public void OnTimeOut()
 	{
-		LinearVelocity = new Vector2(xDirection * velocity, yDirection * velocity);
+		LinearVelocity = new Vector2(xCoeficient * velocity, yCoeficient * velocity);
 	}
 
 	public void Respawn()

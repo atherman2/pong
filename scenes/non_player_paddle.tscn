@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bof4a5ojew4it"]
+
+[ext_resource type="PackedScene" uid="uid://cnl4e6yepudin" path="res://scenes/paddle.tscn" id="1_y4b6a"]
+[ext_resource type="Script" path="res://scripts/NonPlayerPaddle.cs" id="2_ggwa1"]
+
+[node name="NonPlayerPaddle" instance=ExtResource("1_y4b6a")]
+script = ExtResource("2_ggwa1")
+coolDown = 0.12
+outDatedBallDirection = 1.0
+velocity = 350.0
