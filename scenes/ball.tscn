@@ -7,9 +7,10 @@ radius = 15.0
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_shbmr"]
 
-[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("restartTimer")]
+[node name="Ball" type="RigidBody2D" node_paths=PackedStringArray("restartTimer", "spawnTimer")]
 script = ExtResource("1_qobk7")
-restartTimer = NodePath("Timer")
+restartTimer = NodePath("RespawnTimer")
+spawnTimer = NodePath("SapwnTimer")
 xCoeficient = 0.707
 yCoeficient = 0.707
 velocity = 494.975
@@ -22,5 +23,8 @@ position = Vector2(4.76837e-07, 4.76837e-07)
 scale = Vector2(30, 30)
 texture = SubResource("PlaceholderTexture2D_shbmr")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 0.6
+
+[node name="SapwnTimer" type="Timer" parent="."]
+wait_time = 4.0

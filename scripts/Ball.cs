@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 public partial class Ball : RigidBody2D
 {
-	[Export] private Timer restartTimer;
+	[Export] private Timer restartTimer, spawnTimer;
 	[Export] private float xCoeficient, yCoeficient, velocity;
 	[Signal] public delegate void ScoredEventHandler(ScoreBoundary.ScoreSideObject scoreSideObject);
 	private Vector2 respawnPoint;
@@ -14,10 +14,11 @@ public partial class Ball : RigidBody2D
 	{
 		respawnPoint = Position;
 		BodyEntered += OnBodyEntered;
-		restartTimer.Timeout += OnTimeOut;
+		restartTimer.Timeout += OnRespawnTimeOut;
 		ContactMonitor = true;
 		MaxContactsReported = 3;
-		LinearVelocity = new Vector2(xCoeficient * velocity, yCoeficient * velocity);
+		spawnTimer.Timeout += OnRespawnTimeOut;
+		spawnTimer.Start();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,7 +49,7 @@ public partial class Ball : RigidBody2D
 		}
 	}
 
-	public void OnTimeOut()
+	public void OnRespawnTimeOut()
 	{
 		LinearVelocity = new Vector2(xCoeficient * velocity, yCoeficient * velocity);
 	}

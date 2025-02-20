@@ -1,0 +1,22 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5vyn23q2rrpg"]
+
+[ext_resource type="Script" path="res://scripts/GameManager.cs" id="1_d4sjf"]
+[ext_resource type="PackedScene" uid="uid://sftxqie526dm" path="res://scenes/play_menu.tscn" id="2_378xl"]
+[ext_resource type="PackedScene" uid="uid://cxcsi57o0i2jf" path="res://scenes/start_menu.tscn" id="2_iuqcs"]
+[ext_resource type="PackedScene" uid="uid://ce1eacahsbmdw" path="res://scenes/player_versus_player_game.tscn" id="3_coxay"]
+[ext_resource type="PackedScene" uid="uid://bw1qtc4bk5x5f" path="res://scenes/easy_game.tscn" id="4_78awm"]
+[ext_resource type="PackedScene" uid="uid://dovn6os0wm0l8" path="res://scenes/medium_game.tscn" id="5_rpd66"]
+[ext_resource type="PackedScene" uid="uid://7u0n7vde7ifs" path="res://scenes/hard_game.tscn" id="6_fvdnc"]
+
+[node name="GameManager" type="Node" node_paths=PackedStringArray("startMenu")]
+script = ExtResource("1_d4sjf")
+startMenu = NodePath("StartMenu")
+playMenuScene = ExtResource("2_378xl")
+pvpScene = ExtResource("3_coxay")
+easyScene = ExtResource("4_78awm")
+mediumScene = ExtResource("5_rpd66")
+hardScene = ExtResource("6_fvdnc")
+
+[node name="StartMenu" parent="." instance=ExtResource("2_iuqcs")]
+
+[connection signal="PlayPressed" from="StartMenu" to="." method="OnPlayPressed"]
